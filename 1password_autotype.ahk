@@ -2,20 +2,7 @@
 #SingleInstance Force
 
 ; --------------- Paste password only -------------------------------
-^p:: ; Ctrl + p
-^+v:: ; Ctrl + Shift + v
-{
-    StartPastePassword()
-}
-
-; --------------- Paste username and password only ------------------
 ^ü:: ; Ctrl + ü
-{
-    StartPasteUserName()
-}
-
-; --------------- Functions -----------------------------------------
-StartPastePassword()
 {
     Onepassword_window_pid := GetCurrentWindowPID()
     target_window_pid := GetWindowToPasteIn()
@@ -24,7 +11,18 @@ StartPastePassword()
     return
 }
 
-StartPasteUserName()
+; --------------- Onetime password only -------------------------------
+^+ü:: ; Ctrl + ü
+{
+    Onepassword_window_pid := GetCurrentWindowPID()
+    target_window_pid := GetWindowToPasteIn()
+    initialize(target_window_pid, Onepassword_window_pid)
+    PasteOneTimePassword(Onepassword_window_pid, target_window_pid)
+    return
+}
+
+; --------------- Paste username only ------------------
+^p:: ; Ctrl + p
 {
     Onepassword_window_pid := GetCurrentWindowPID()
     target_window_pid := GetWindowToPasteIn()
@@ -45,6 +43,7 @@ StartPasteUserName()
     return
 }
 
+; --------------- Functions -----------------------------------------
 initialize(target_window_pid, Onepassword_window_pid)
 {
     QuitIfNotCalledFrom1Password(Onepassword_window_pid)
@@ -84,7 +83,7 @@ PasteUserName(Onepassword_window_pid, target_window_pid)
     WinActivate("ahk_pid " target_window_pid)
     Sleep 300 ; Wait for pop-up to disappear and re-focus previous window
     SetKeyDelay 20
-    Send A_Clipboard ; Paste pw to focused field
+    Send "{Raw}" A_Clipboard ; Paste pw to focused field
     A_Clipboard := "" ; Empty clipboard
 }
 
@@ -97,7 +96,20 @@ PastePassword(Onepassword_window_pid, target_window_pid)
     WinActivate("ahk_pid " target_window_pid)
     Sleep 300 ; Wait for pop-up to disappear and re-focus previous window
     SetKeyDelay(20)
-    Send A_Clipboard ; Paste pw to focused field
+    Send "{Raw}" A_Clipboard ; Paste pw to focused field
+    A_Clipboard := "" ; Empty clipboard
+}
+
+PasteOneTimePassword(Onepassword_window_pid, target_window_pid)
+{
+    WinActivate("ahk_pid " Onepassword_window_pid)
+    Sleep 200
+    Send "^!c" ; Ctrl + Shift + c to copy password
+    Sleep 200 ; Wait for pop-up to disappear and re-focus previous window
+    WinActivate("ahk_pid " target_window_pid)
+    Sleep 300 ; Wait for pop-up to disappear and re-focus previous window
+    SetKeyDelay(20)
+    Send "{Raw}" A_Clipboard ; Paste pw to focused field
     A_Clipboard := "" ; Empty clipboard
 }
 
