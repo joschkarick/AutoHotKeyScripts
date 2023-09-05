@@ -79,6 +79,13 @@ MouseGetPos,,,KDE_id ; Get the window id
 WinGetClass, ClassWin, ahk_id %KDE_id%
 If ClassWin = WorkerW 
 	return
+
+WinGetPos,,,Width,Height, ahk_id %KDE_id%
+if ( Width >= A_ScreenWidth && Height >= A_ScreenHeight )
+{
+    return
+}
+
 ; If the window is maximized, restore the initial position 
 ; and size of the window and center the mouse.
 WinGet,KDE_Win, MinMax,ahk_id %KDE_id%
