@@ -27,27 +27,27 @@ Menu, Tray, Icon, imageres.dll, 262 ; makes the icon into two window
 ; 
 ; The goal with this script is to easily snap, move and resize windows with a single 
 ; key press and a mouse :
-;   1) Hold down the Ctrl key and LEFT-click anywhere inside a window to drag it to 
+;   1) Hold down the Capslock key and LEFT-click anywhere inside a window to drag it to 
 ;   a new location.
-; 	2) Hold down Ctrl and RIGHT-click-drag anywhere inside a window to easily resize it.
-;   3) Hold down Ctrl and MIDDLE-click-drag to perform different actions : maximize, 
+; 	2) Hold down Capslock and RIGHT-click-drag anywhere inside a window to easily resize it.
+;   3) Hold down Capslock and MIDDLE-click-drag to perform different actions : maximize, 
 ;   always on top or snap a window.
-; 	4) Hold down Ctrl and MIDDLE-click without moving to minimize the window under 
+; 	4) Hold down Capslock and MIDDLE-click without moving to minimize the window under 
 ;   the mouse cursor.
 ;
 ; Shortcuts :
-;  Ctrl + Left Button   + Drag					    : Move a windo  w.
-;  Ctrl + Right Button  + Drag						: Resize a window.
-;  Ctrl + Middle Button + Drag Up					: Maximize/Restore a window.
-;  Ctrl + Middle Button + Drag Down 					: Always On Top a window.
-;  Ctrl + Middle Button + Drag Right 				: Snap to the Right half.
-;  Ctrl + Middle Button + Drag Left 					: Snap to the Left half.
-;  Ctrl + Middle Button + Drag Top Right Corner 		: Snap to the Top-Right quarter. 
-;  Ctrl + Middle Button + Drag Top Left Corner 		: Snap to the Top-Left quarter.
-;  Ctrl + Middle Button + Drag Bottom Right Corner 	: Snap to Bottom-Right quarter.
-;  Ctrl + Middle Button + Drag Bottom Left Corner 	: Snap to the Bottom-Left quarter.
-;  Ctrl + Middle Button + Motionless 				: Minimize a window.
-;  Ctrl + Numpad                                     : Snap the active window.
+;  Capslock + Left Button   + Drag					    : Move a windo  w.
+;  Capslock + Right Button  + Drag						: Resize a window.
+;  Capslock + Middle Button + Drag Up					: Maximize/Restore a window.
+;  Capslock + Middle Button + Drag Down 					: Always On Top a window.
+;  Capslock + Middle Button + Drag Right 				: Snap to the Right half.
+;  Capslock + Middle Button + Drag Left 					: Snap to the Left half.
+;  Capslock + Middle Button + Drag Top Right Corner 		: Snap to the Top-Right quarter. 
+;  Capslock + Middle Button + Drag Top Left Corner 		: Snap to the Top-Left quarter.
+;  Capslock + Middle Button + Drag Bottom Right Corner 	: Snap to Bottom-Right quarter.
+;  Capslock + Middle Button + Drag Bottom Left Corner 	: Snap to the Bottom-Left quarter.
+;  Capslock + Middle Button + Motionless 				: Minimize a window.
+;  Capslock + Numpad                                     : Snap the active window.
 ;
 
 
@@ -72,7 +72,7 @@ SetWinDelay,2
 CoordMode,Mouse
 return
 
-Ctrl & LButton:: ; Ctrl + Left Button
+Capslock & LButton:: ; Capslock + Left Button
 #LButton:: ; Windows + Left Button
 MouseGetPos,,,KDE_id ; Get the window id
 ; Abort if it's the desktop.
@@ -114,7 +114,7 @@ Loop
 return
 
 
-Ctrl & RButton:: ; Ctrl + Right Button
+Capslock & RButton:: ; Capslock + Right Button
 #RButton:: ; Windows + Right Button
 ; Get the mouse position and window id,
 MouseGetPos, KDE_X1, KDE_Y1,KDE_id
@@ -245,63 +245,63 @@ GetMonitorIndexFromWindow(windowHandle) {
 }
 
 ; Win + Numpad = Snap to conrners for diagonals, or top, bottom, left, right of screen (Landscape)
-Ctrl & Numpad7:: 
+Capslock & Numpad7:: 
 #Numpad7:: 
 WinGetClass, ClassWin , A ; Abort if it's the desktop.
 If ClassWin = WorkerW 
     return
 SnapActiveWindow("top","left","half")
 return
-Ctrl & Numpad8::
+Capslock & Numpad8::
 #Numpad8::
 WinGetClass, ClassWin , A ; Abort if it's the desktop.
 If ClassWin = WorkerW 
     return
 SnapActiveWindow("top","full","half")
 return
-Ctrl & Numpad9::
+Capslock & Numpad9::
 #Numpad9::
 WinGetClass, ClassWin , A ; Abort if it's the desktop.
 If ClassWin = WorkerW 
     return
 SnapActiveWindow("top","right","half")
 return
-Ctrl & Numpad4::
+Capslock & Numpad4::
 #Numpad4::
 WinGetClass, ClassWin , A ; Abort if it's the desktop.
 If ClassWin = WorkerW 
     return
 SnapActiveWindow("top","left","full")
 return
-Ctrl & Numpad6::
+Capslock & Numpad6::
 #Numpad6::
 WinGetClass, ClassWin , A ; Abort if it's the desktop.
 If ClassWin = WorkerW 
     return
 SnapActiveWindow("top","right","full")
 return
-Ctrl & Numpad1::
+Capslock & Numpad1::
 #Numpad1::
 WinGetClass, ClassWin , A ; Abort if it's the desktop.
 If ClassWin = WorkerW 
     return
 SnapActiveWindow("bottom","left","half")
 return
-Ctrl & Numpad2::
+Capslock & Numpad2::
 #Numpad2::
 WinGetClass, ClassWin , A ; Abort if it's the desktop.
 If ClassWin = WorkerW 
     return
 SnapActiveWindow("bottom","full","half")
 return
-Ctrl & Numpad3::
+Capslock & Numpad3::
 #Numpad3::
 WinGetClass, ClassWin , A ; Abort if it's the desktop.
 If ClassWin = WorkerW 
     return
 SnapActiveWindow("bottom","right","half")
 return
-Ctrl & Numpad5::
+Capslock & Numpad5::
 #Numpad5::
 WinGetClass, ClassWin , A ; Abort if it's the desktop.
 If ClassWin = WorkerW 
@@ -320,7 +320,7 @@ return
 ; --- Mouse Gesture ---
 ; ---------------------
 
-Ctrl & MButton:: ;  Ctrl + Middle Button
+Capslock & MButton:: ;  Capslock + Middle Button
 #MButton:: ;  Windows + Middle Button
 MouseGetPos, X1, Y1, KDE_id ; Get the window id
 ; Abort if it's the desktop.
