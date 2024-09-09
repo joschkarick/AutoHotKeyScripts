@@ -2,6 +2,7 @@
 #SingleInstance Force
 
 ; --------------- Paste password only -------------------------------
+^ß:: ; Ctrl + ß
 ^ü:: ; Ctrl + ü
 {
     Onepassword_window_pid := GetCurrentWindowPID()
@@ -12,6 +13,7 @@
 }
 
 ; --------------- Password and Onetime password -----------------------
+^+ß:: ; Ctrl + Shift + ß
 ^+ü:: ; Ctrl + Shift + ü
 {
     Onepassword_window_pid := GetCurrentWindowPID()
@@ -22,6 +24,7 @@
 }
 
 ; --------------- Onetime password only -------------------------------
+^':: ; Ctrl + '
 ^ä:: ; Ctrl + ä
 {
     Onepassword_window_pid := GetCurrentWindowPID()
